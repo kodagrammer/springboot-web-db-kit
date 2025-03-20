@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 1분마다 설정 파일의 변경을 확인하여 변경 시 갱신 -->
+<configuration scan="true" scanperiod="1 minutes">
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+    <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+
+    <!-- 변수 설정 -->
+    <property name="CONSOLE_APPENDER_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(${LOG_LEVEL_PATTERN:-%5p}) %-5(${PID:- }) [%16.16(%thread)] %cyan([%30.30(%logger{27}:%line)]) %msg%n" />
+
+    <!-- CONSOLE Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${CONSOLE_APPENDER_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="jdbc" level="ERROR" />
+    <logger name="jdbc.connection" level="WARN" />
+    <logger name="jdbc.sqlonly" level="OFF"/>
+    <logger name="jdbc.sqltiming" level="INFO" />
+    <logger name="jdbc.audit" level="WARN" />
+    <logger name="jdbc.resultset" level="WARN" />
+    <logger name="jdbc.resultsettable" level="WARN" />
+    <logger name="com.zaxxer.hikari" level="OFF" />
+    <logger name="freemarker.cache" level="OFF" />
+    <logger name="org.mybatis" level="DEBUG"/>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+</configuration>

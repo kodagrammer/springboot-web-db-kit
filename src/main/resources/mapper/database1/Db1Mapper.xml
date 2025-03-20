@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koda.multitranx.database1.mapper.DefaultPoolMapper">
+    <sql id="databasePoolName">'hikari-default'</sql>
+
+    <select id="selectTransactionTest" resultType="Map">
+        select id, reg_date, reg_database_pool
+        from transaction_test
+        where 1=1
+          and reg_database_pool = <include refid="databasePoolName"/>
+    </select>
+
+    <insert id="insertTransactionTest" parameterType="String">
+        insert into transaction_test (id, reg_date, reg_database_pool)
+        values (#{id}, now(), <include refid="databasePoolName"/>)
+    </insert>
+</mapper>
